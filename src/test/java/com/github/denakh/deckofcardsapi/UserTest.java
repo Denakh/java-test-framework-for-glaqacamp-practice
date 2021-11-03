@@ -23,7 +23,7 @@ public class UserTest {
         //given: created user
         User createdUser = USER_REQUESTER.createUserWithTasks(TEST_USER);
 
-        //when: add avatar for the created user
+        //when: add avatar for the created user (see the result in http://users.bugred.ru/)
         USER_REQUESTER.addAvatar(AVATAR_FILE, createdUser.getEmail());
 
         //and: delete the avatar

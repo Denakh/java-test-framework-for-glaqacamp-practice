@@ -50,31 +50,37 @@ public class UserRequester {
                 .contentType(ContentType.JSON)
                 .body(newUser)
                 .post(CREATE_USER_WITH_TASKS_ENDPOINT);
-        System.out.println("Response body:");
-        String bodyMessage = response.body().prettyPrint();
-        assert response.statusCode() == 200;
-        assert !bodyMessage.contains("error");
+        verifyNoErrorInResponse(response);
         return response.as(User.class);
     }
 
     public Map<String, String> addAvatar(File avatarFile, String email) {
-        return RestAssured.given(requestSpecification)
+        Response response = RestAssured.given(requestSpecification)
                 .param("email", email)
-                .multiPart(avatarFile)
+                .multiPart("avatar", avatarFile, "image/jpeg")
                 .post(ADD_AVATAR_ENDPOINT)
                 .then()
                 .statusCode(200)
-                .extract()
-                .body().jsonPath().getMap("");
+                .extract().response();
+        verifyNoErrorInResponse(response);
+        return response.body().jsonPath().getMap("");
     }
 
     public Map<String, String> deleteAvatar(String email) {
-        return RestAssured.given(requestSpecification)
+        Response response = RestAssured.given(requestSpecification)
                 .param("email", email)
                 .delete(DELETE_AVATAR_ENDPOINT)
                 .then()
                 .statusCode(200)
-                .extract()
-                .body().jsonPath().getMap("");
+                .extract().response();
+        verifyNoErrorInResponse(response);
+        return response.body().jsonPath().getMap("");
+    }
+
+    private void verifyNoErrorInResponse(Response response) {
+        System.out.println("Response body:");
+        String bodyMessage = response.body().prettyPrint();
+        assert response.statusCode() == 200;
+        assert !bodyMessage.contains("error");
     }
 }

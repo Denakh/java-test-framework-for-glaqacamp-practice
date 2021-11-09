@@ -2,7 +2,7 @@ package com.github.denakh.deckofcardsapi;
 
 import com.github.denakh.deckofcardsapi.models.users.User;
 import io.restassured.RestAssured;
-import io.restassured.authentication.PreemptiveBasicAuthScheme;
+import io.restassured.authentication.PreemptiveOAuth2HeaderScheme;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
@@ -22,18 +22,21 @@ public class UserRequester {
     private final RequestSpecification requestSpecification;
 
     public UserRequester() {
+        PreemptiveOAuth2HeaderScheme authenticationScheme = new PreemptiveOAuth2HeaderScheme();
+        authenticationScheme.setAccessToken(Constants.AUTH_TOKEN);
         requestSpecification =
                 new RequestSpecBuilder()
                         .setBaseUri(USER_API_ROOT_URL)
+                        .setAuth(authenticationScheme)
                         .build();
     }
 
     public UserRequester(String userApiRootUrl) {
-//        PreemptiveOAuth2HeaderScheme authenticationScheme = new PreemptiveOAuth2HeaderScheme();
-//        authenticationScheme.setAccessToken(Constants.AUTH_TOKEN);
-        PreemptiveBasicAuthScheme authenticationScheme = new PreemptiveBasicAuthScheme();
-        authenticationScheme.setUserName(Constants.LOGIN);
-        authenticationScheme.setPassword(Constants.PASSWORD);
+        PreemptiveOAuth2HeaderScheme authenticationScheme = new PreemptiveOAuth2HeaderScheme();
+        authenticationScheme.setAccessToken(Constants.AUTH_TOKEN);
+//        PreemptiveBasicAuthScheme authenticationScheme = new PreemptiveBasicAuthScheme();
+//        authenticationScheme.setUserName(Constants.LOGIN);
+//        authenticationScheme.setPassword(Constants.PASSWORD);
         requestSpecification =
                 new RequestSpecBuilder()
                         .setBaseUri(userApiRootUrl)

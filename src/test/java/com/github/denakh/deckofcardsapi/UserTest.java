@@ -19,7 +19,7 @@ public class UserTest {
     private static final File AVATAR_FILE = new File("src/test/java/resources/kote.jpg");
 
     @Test
-    public void addingAndDeletingForNewUserIsSuccessful() {
+    public void avatarAddingAndDeletingForNewUserIsSuccessful() {
         //given: created user
         User createdUser = USER_REQUESTER.createUserWithTasks(TEST_USER);
 

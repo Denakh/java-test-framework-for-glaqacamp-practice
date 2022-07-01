@@ -54,6 +54,15 @@ public class UserRequester {
         return response.as(User.class);
     }
 
+    public User createUserWithTasksByXml(User newUser) {
+        Response response = RestAssured.given(requestSpecification)
+                .contentType(ContentType.XML)
+                .body(newUser).log().all()
+                .post(CREATE_USER_WITH_TASKS_ENDPOINT);
+        verifyNoErrorInResponse(response);
+        return response.as(User.class);
+    }
+
     public Map<String, String> addAvatar(File avatarFile, String email) {
         Response response = RestAssured.given(requestSpecification)
                 .param("email", email)

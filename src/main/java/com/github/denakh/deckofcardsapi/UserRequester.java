@@ -49,6 +49,7 @@ public class UserRequester {
                 //.header("SomeHeaderName", "someHeaderValue")
                 .contentType(ContentType.JSON)
                 .body(newUser)
+                .log().all()
                 .post(CREATE_USER_WITH_TASKS_ENDPOINT);
         verifyNoErrorInResponse(response);
         return response.as(User.class);
@@ -57,7 +58,8 @@ public class UserRequester {
     public User createUserWithTasksByXml(User newUser) {
         Response response = RestAssured.given(requestSpecification)
                 .contentType(ContentType.XML)
-                .body(newUser).log().all()
+                .body(newUser)
+                .log().all()
                 .post(CREATE_USER_WITH_TASKS_ENDPOINT);
         verifyNoErrorInResponse(response);
         return response.as(User.class);

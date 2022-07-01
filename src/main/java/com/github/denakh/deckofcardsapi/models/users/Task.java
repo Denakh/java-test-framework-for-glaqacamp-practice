@@ -1,5 +1,8 @@
 package com.github.denakh.deckofcardsapi.models.users;
 
+import jakarta.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class Task {
 
     private String title;

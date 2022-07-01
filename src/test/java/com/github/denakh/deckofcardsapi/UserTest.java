@@ -22,6 +22,7 @@ public class UserTest {
     public void avatarAddingAndDeletingForNewUserIsSuccessful() {
         //given: created user
         User createdUser = USER_REQUESTER.createUserWithTasks(TEST_USER);
+        // User createdUser = USER_REQUESTER.createUserWithTasksByXml(TEST_USER);
 
         //when: add avatar for the created user (see the result in http://users.bugred.ru/)
         USER_REQUESTER.addAvatar(AVATAR_FILE, createdUser.getEmail());

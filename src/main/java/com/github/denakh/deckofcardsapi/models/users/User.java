@@ -1,11 +1,13 @@
 package com.github.denakh.deckofcardsapi.models.users;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.xml.bind.annotation.XmlRootElement;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+@XmlRootElement
 public class User {
 
     private String name;
